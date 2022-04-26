@@ -45,4 +45,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-apiKey
+.app_strings.dart
