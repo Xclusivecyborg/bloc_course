@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CubitExample(),
         ),
         BlocProvider<NewsBloc>(
-          create: (context) => NewsBloc(NewsRepository(ApiServiceImpl(Dio()))),
+          create: (context) => NewsBloc(NewsRepository(service: ApiServiceImpl(dio: Dio()))),
         ),
 
       ],

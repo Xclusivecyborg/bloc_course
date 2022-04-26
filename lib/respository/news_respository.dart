@@ -1,26 +1,29 @@
 import 'package:bloc_course/constants/app_strings.dart';
-import 'package:bloc_course/services/api_service_impl.dart';
 import 'package:dio/dio.dart';
+import 'package:equatable/equatable.dart';
 
 import '../models/news_model.dart';
+import '../services/api_service.dart';
 
-class NewsRepository {
-  NewsRepository(this._service);
+class NewsRepository extends Equatable {
+  const NewsRepository({required this.service});
 
-  final ApiServiceImpl _service;
+  final ApiService service;
 
-  Future<T> getNews<T>() async {
+  Future<List<News>> getNews() async {
     try {
-      final res = await _service.get(url: url + apiKey);
+      final res = await service.get(url: url + apiKey);
       if (res.statusCode == 200) {
-        final news = res.data['articles'];
-        return news.map<News>((e) => News.fromJson(e)).toList();
+        List news = res.data['articles'];
+        return news.map((e) => News.fromJson(e)).toList();
       } else {
-        return "An error occurred" as dynamic;
+        throw Exception("An error occurred");
       }
     } on DioError catch (e) {
-      print(e);
-      return e.message as dynamic;
+      throw Exception(e);
     }
   }
+
+  @override
+  List<Object> get props => [service];
 }
