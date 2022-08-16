@@ -37,8 +37,9 @@ class _NewsViewState extends State<NewsView> {
                   );
                 },
               );
+            } else {
+              return Center(child: Text("An error occurred"));
             }
-            return Center(child: Text(state.error));
           },
         ),
       ),

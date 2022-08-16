@@ -7,10 +7,11 @@ class NewsState extends Equatable {
   final LoadState loadState;
   final String error;
 
-  const NewsState(
-      {this.news = const [],
-      this.error = '',
-      this.loadState = LoadState.loading});
+  const NewsState({
+    this.news = const [],
+    this.error = '',
+    this.loadState = LoadState.loading,
+  });
 
   NewsState copyWith({List<News>? news, LoadState? loadState, String? error}) {
     return NewsState(
